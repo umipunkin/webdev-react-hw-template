@@ -1,25 +1,29 @@
 # Skypro.Music API
 
+API для музыкального плеера, позволяет получает разные плейлисты с музыкой и управлять избранными треками пользователя.
+
 Документация в swagger:
 https://painassasin.online/swagger/
 
-## Пользователи
+## Пользователи и авторизация
 
-| Описание запроса   | Тип запроса | Пример запроса                                 |
-| ------------------ | ----------- | ---------------------------------------------- |
-| Зарегистрироваться | POST        | https://painassasin.online/user/signup/        |
-| Войти              | POST        | https://painassasin.online/user/login/         |
-| Получить ключ      | POST        | https://painassasin.online/user/token/         |
-| Обновитьключ       | POST        | https://painassasin.online/user/token/refresh/ |
+- [Документация API «Пользователи и авторизация»](./docs/AuthAPI.md)
 
-## Треки
+## Плейлисты и треки
 
-| Описание запроса                 | Тип запроса | Пример запроса                                           |
-| -------------------------------- | ----------- | -------------------------------------------------------- |
-| Получить все треки               | GET         | https://painassasin.online/catalog/track/all/            |
-| Получить трек по id              | GET         | https://painassasin.online/catalog/track/<id\>           |
-| Добавить трек в избранное по id  | POST        | https://painassasin.online/catalog/track/<id\>/favorite/ |
-| Удалить трек из избранного по id | DELETE      | https://painassasin.online/catalog/track/<id\>/favorite/ |
-| Получить все избранные треки     | GET         | https://painassasin.online/catalog/track/favorite/all/   |
-| Посмотреть подборки              | GET         | https://painassasin.online/catalog/selection/            |
-| Посмотреть подборку по id        | GET         | https://painassasin.online/catalog/selection/<id\>/      |
+Api для управления плейлистами пользователя и получения треков.
+
+Документация в swagger:
+https://painassasin.online/swagger/
+
+| Описание запроса                    | Тип запроса | Пример запроса                                           |
+| ----------------------------------- | ----------- | -------------------------------------------------------- |
+| Получить все треки                  | GET         | https://painassasin.online/catalog/track/all/            |
+| Получить трек по id                 | GET         | https://painassasin.online/catalog/track/<id\>           |
+| Посмотреть подборки                 | GET         | https://painassasin.online/catalog/selection/            |
+| Посмотреть подборку по id           | GET         | https://painassasin.online/catalog/selection/<id\>/      |
+| Добавить трек в избранное по id \*  | POST        | https://painassasin.online/catalog/track/<id\>/favorite/ |
+| Удалить трек из избранного по id \* | DELETE      | https://painassasin.online/catalog/track/<id\>/favorite/ |
+| Получить все избранные треки \*     | GET         | https://painassasin.online/catalog/track/favorite/all/   |
+
+Запросы отмеченные \* требуют авторизацию.
