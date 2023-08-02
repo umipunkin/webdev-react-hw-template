@@ -2,7 +2,7 @@
 
 Api для управления пользователями и авторизацией.
 
-## Коротко
+# Коротко
 
 Документация в swagger:
 https://painassasin.online/swagger/
@@ -14,9 +14,9 @@ https://painassasin.online/swagger/
 | Получить токен     | POST        | https://painassasin.online/user/token/         |
 | Обновить токен     | POST        | https://painassasin.online/user/token/refresh/ |
 
-## Подробно
+# Подробно
 
-### Зарегистрироваться
+## Зарегистрироваться
 
 Адрес: https://painassasin.online/user/signup/
 
@@ -77,7 +77,7 @@ fetch("https://painassasin.online/user/signup/", {
 
 Сервер сломался
 
-### Войти
+## Войти
 
 Адрес: https://painassasin.online/user/login/
 
@@ -132,7 +132,7 @@ fetch("https://painassasin.online/user/login/", {
 
 Сервер сломался
 
-### Получить токен
+## Получить токен
 
 
 Адрес: https://painassasin.online/user/token/
@@ -183,7 +183,7 @@ fetch("https://painassasin.online/user/token/", {
 
 
 
-### Обновить токен
+## Обновить токен
 
 Адрес: https://painassasin.online/user/token/refresh/
 
