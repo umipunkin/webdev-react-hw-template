@@ -134,15 +134,51 @@ fetch("https://painassasin.online/user/login/", {
 
 ### Получить токен
 
+
 Адрес: https://painassasin.online/user/token/
 
 Метод: POST
 
-Возвращает access и refresh токен по email и паролю пользователя.
-access токен нужен для того чтобы делать авторизованные запросы в апи (например запрос на добавление в "избаранные треки").
-access токеном можно пользоваться ограниченное количество времени, потом он "протухает".
-Чтобы получить новый access токен, нужно сделать запрос в api "Обновить токен" с refresh токеном.
-refresh токен не протухает со временем, но может протухнуть если пользователь сменит пароль или нажмет кнопку "выйти на всех устройствах".
+Эндпоинт создает Access и Refresh токен для пользователя по email и паролю.
+Access токен нужен для того чтобы делать авторизованные запросы в апи (например запрос на добавление в "избаранные треки").
+Access токеном можно пользоваться ограниченное количество времени, 200 секунд, потом он "протухает".
+Refresh токен не протухает со временем, но может протухнуть если пользователь сменит пароль или нажмет кнопку "выйти на всех устройствах".
+
+Новых Access токен можно получить двумя способами
+* (рекомендуемый) Сделать запрос на эндпоинт "Обновить токен", он не требует логин и пароль, а только Refresh токен.
+* (нерекомендуемый из-за плохого UX и проблем с безопасностью) Сделать повторный запрос на этот эндпоинт, для этого потребуется логин и пароль пользователя
+
+
+Пример запроса:
+```js
+fetch("https://painassasin.online/user/token/", {
+  method: "POST",
+  body: JSON.stringify({
+    email: "gleb@fokin.ru",
+    password: "gleb@fokin.ru",
+  }),
+  headers: {
+    // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+    "content-type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+```
+
+#### 200 ответ
+Если логин и пароль верные, то сервер вернут пару access и refresh nокенов:
+
+```json
+{
+  refresh: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY5MTA0NjUzMSwiaWF0IjoxNjkwOTYwMTMxLCJqdGkiOiI2YTFhODg4Zjg5NjY0NjgyYTBmYWYyNjk4ZjZiNjViZSIsInVzZXJfaWQiOjc5Mn0.idHYiVKZqSxPCpNIvYpFgEs6nRTJ3FuPS60RAKV8XC8",
+  access: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4"
+}
+```
+#### 400, 401 и 500 ответы
+Такие же как в эндпоинте "Войти"
+
+
 
 ### Обновить токен
 
