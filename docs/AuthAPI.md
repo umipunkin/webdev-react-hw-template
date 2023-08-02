@@ -178,7 +178,7 @@ fetch("https://painassasin.online/user/token/", {
 ```
 
 
-jfyi: токен - это не просто набор случайных символов, токен это закодированные через [JWT](https://jwt.io/) данные, попробуйте раскодировать их при помощи [декодер](https://jwt.io/)
+jfyi: токен - это не просто набор случайных символов, токен это закодированные через JWT данные. Посмотреть на внутренности токена можно через специальный JWT декодер. [Раскодированный access токен из ответа выше](https://jwt.io/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4)
 
 #### 400, 401 и 500 ответы
 Такие же как в эндпоинте "Войти"
