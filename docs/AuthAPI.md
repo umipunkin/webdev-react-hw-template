@@ -139,7 +139,7 @@ fetch("https://painassasin.online/user/login/", {
 
 Метод: POST
 
-Эндпоинт создает *Access* и *Refresh* токен для пользователя по email и паролю.
+Эндпоинт создает *Access* и *Refresh* [JWT](https://jwt.io/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4) токены для пользователя по email и паролю.
 
 *Access* токен нужен для того чтобы делать авторизованные запросы в апи (например запрос на добавление в "избранные треки"). Access токеном можно пользоваться 200 секунд, потом он "протухает".
 
@@ -148,6 +148,7 @@ fetch("https://painassasin.online/user/login/", {
 Новых *Access* токен можно получить двумя способами
 * (рекомендуемый) Сделать запрос на эндпоинт "Обновить токен", для этого потребуется *Refresh* токен
 * (нерекомендуемый из-за плохого UX и проблем с безопасностью) Сделать повторный запрос на этот эндпоинт, для этого потребуется логин и пароль пользователя
+
 
 
 Пример запроса:
@@ -176,9 +177,6 @@ fetch("https://painassasin.online/user/token/", {
   "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4"
 }
 ```
-
-
-jfyi: токен - это не просто набор случайных символов, токен это закодированные через JWT данные. Посмотреть на внутренности токена можно через специальный JWT декодер. [Раскодированный access токен из ответа выше](https://jwt.io/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4)
 
 #### 400, 401 и 500 ответы
 Такие же как в эндпоинте "Войти"
