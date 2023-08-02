@@ -134,24 +134,23 @@ fetch("https://painassasin.online/user/login/", {
 
 ## Получить токен
 
-
 Адрес: https://painassasin.online/user/token/
 
 Метод: POST
 
-Эндпоинт создает *Access* и *Refresh* [JWT](https://jwt.io/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4) токены для пользователя по email и паролю.
+Эндпоинт создает _Access_ и _Refresh_ [JWT](https://jwt.io/?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTYwNDMxLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6ImE4NDAwZjRkNWUzMTQ4NGJiMzE4YzUzMjE3Y2NhNWZmIiwidXNlcl9pZCI6NzkyfQ.SfvLYWbz72DQqWK7SyF4Yx9Zxx8hGsNxHEcwOU0RTk4) токены для пользователя по email и паролю.
 
-*Access* токен нужен для того чтобы делать авторизованные запросы в апи (например запрос на добавление в "избранные треки"). Access токеном можно пользоваться 200 секунд, потом он "протухает".
+_Access_ токен нужен для того чтобы делать авторизованные запросы в апи (например запрос на добавление в "избранные треки"). Access токеном можно пользоваться 200 секунд, потом он "протухает".
 
-*Refresh* токен не протухает со временем, но может протухнуть если пользователь сменит пароль или нажмет кнопку "выйти на всех устройствах".
+_Refresh_ токен не протухает со временем, но может протухнуть если пользователь сменит пароль или нажмет кнопку "выйти на всех устройствах".
 
-Новых *Access* токен можно получить двумя способами
-* (рекомендуемый) Сделать запрос на эндпоинт "Обновить токен", для этого потребуется *Refresh* токен
-* (нерекомендуемый из-за плохого UX и проблем с безопасностью) Сделать повторный запрос на этот эндпоинт, для этого потребуется логин и пароль пользователя
+Новых _Access_ токен можно получить двумя способами
 
-
+- (рекомендуемый) Сделать запрос на эндпоинт "Обновить токен", для этого потребуется _Refresh_ токен
+- (нерекомендуемый из-за плохого UX и проблем с безопасностью) Сделать повторный запрос на этот эндпоинт, для этого потребуется логин и пароль пользователя
 
 Пример запроса:
+
 ```js
 fetch("https://painassasin.online/user/token/", {
   method: "POST",
@@ -169,7 +168,8 @@ fetch("https://painassasin.online/user/token/", {
 ```
 
 #### 200 ответ
-Если логин и пароль верные, то сервер вернут пару access и refresh nокенов:
+
+Логин и пароль верные, сервер возвращает пару access и refresh токенов:
 
 ```json
 {
@@ -179,9 +179,8 @@ fetch("https://painassasin.online/user/token/", {
 ```
 
 #### 400, 401 и 500 ответы
+
 Такие же как в эндпоинте "Войти"
-
-
 
 ## Обновить токен
 
@@ -190,3 +189,50 @@ fetch("https://painassasin.online/user/token/", {
 Метод: POST
 
 Принимает refresh токен, возвращает "живой" acces токен.
+
+Пример запроса:
+
+```js
+fetch("https://painassasin.online/user/token/refresh/", {
+  method: "POST",
+  body: JSON.stringify({
+    refresh:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY5MTA0NjUzMSwiaWF0IjoxNjkwOTYwMTMxLCJqdGkiOiI2YTFhODg4Zjg5NjY0NjgyYTBmYWYyNjk4ZjZiNjViZSIsInVzZXJfaWQiOjc5Mn0.idHYiVKZqSxPCpNIvYpFgEs6nRTJ3FuPS60RAKV8XC8",
+  }),
+  headers: {
+    // API требует обязательного указания заголовка content-type, так апи понимает что мы посылаем ему json строчку в теле запроса
+    "content-type": "application/json",
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+```
+
+#### 200 ответ
+
+Refresh токен валидный, возвращает новый access токен
+
+```json
+{
+  "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkwOTcwNzcwLCJpYXQiOjE2OTA5NjAxMzEsImp0aSI6IjcxZjMyZjc5ZGRiMjRhNDE4MGQ5OGVjZTgzMWRkMmYyIiwidXNlcl9pZCI6NzkyfQ.E9SdHw1Aui5HkBIWmO_H0Ibv1-MOgqElLy-BCRiYrrU"
+}
+```
+
+#### 401 ответ
+
+Refresh токен невалидный, возвращает объект с ошибкой
+
+```json
+{
+  "detail": "Токен недействителен или просрочен",
+  "code": "token_not_valid"
+}
+```
+
+#### 400 ответ
+
+В теле запроса не передан refresh токен
+
+#### 500 ответ
+
+Сервер сломался
