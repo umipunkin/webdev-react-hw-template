@@ -4,18 +4,18 @@ Api для управления пользователями и авториза
 
 # Коротко
 
-| Описание запроса   | Тип запроса | Пример запроса                                 |
-| ------------------ | ----------- | ---------------------------------------------- |
-| Зарегистрироваться | POST        | https://painassasin.online/user/signup/        |
-| Войти              | POST        | https://painassasin.online/user/login/         |
-| Получить токен     | POST        | https://painassasin.online/user/token/         |
-| Обновить токен     | POST        | https://painassasin.online/user/token/refresh/ |
+| Описание запроса   | Тип запроса | Пример запроса                                           |
+| ------------------ | ----------- | -------------------------------------------------------- |
+| Зарегистрироваться | POST        | https://skypro-music-api.skyeng.tech/user/signup/        |
+| Войти              | POST        | https://skypro-music-api.skyeng.tech/user/login/         |
+| Получить токен     | POST        | https://skypro-music-api.skyeng.tech/user/token/         |
+| Обновить токен     | POST        | https://skypro-music-api.skyeng.tech/user/token/refresh/ |
 
 # Подробно
 
 ## Зарегистрироваться
 
-Адрес: https://painassasin.online/user/signup/
+Адрес: https://skypro-music-api.skyeng.tech/user/signup/
 
 Метод: POST
 
@@ -24,7 +24,7 @@ Api для управления пользователями и авториза
 Пример запроса:
 
 ```js
-fetch("https://painassasin.online/user/signup/", {
+fetch("https://skypro-music-api.skyeng.tech/user/signup/", {
   method: "POST",
   body: JSON.stringify({
     email: "gleb@fokin.ru",
@@ -76,7 +76,7 @@ fetch("https://painassasin.online/user/signup/", {
 
 ## Войти
 
-Адрес: https://painassasin.online/user/login/
+Адрес: https://skypro-music-api.skyeng.tech/user/login/
 
 Метод: POST
 
@@ -84,7 +84,7 @@ fetch("https://painassasin.online/user/signup/", {
 Пример запроса:
 
 ```js
-fetch("https://painassasin.online/user/login/", {
+fetch("https://skypro-music-api.skyeng.tech/user/login/", {
   method: "POST",
   body: JSON.stringify({
     email: "gleb@fokin.ru",
@@ -131,7 +131,7 @@ fetch("https://painassasin.online/user/login/", {
 
 ## Получить токен
 
-Адрес: https://painassasin.online/user/token/
+Адрес: https://skypro-music-api.skyeng.tech/user/token/
 
 Метод: POST
 
@@ -149,7 +149,7 @@ _Refresh_ токен не протухает со временем, но мож�
 Пример запроса:
 
 ```js
-fetch("https://painassasin.online/user/token/", {
+fetch("https://skypro-music-api.skyeng.tech/user/token/", {
   method: "POST",
   body: JSON.stringify({
     email: "gleb@fokin.ru",
@@ -181,7 +181,7 @@ fetch("https://painassasin.online/user/token/", {
 
 ## Обновить токен
 
-Адрес: https://painassasin.online/user/token/refresh/
+Адрес: https://skypro-music-api.skyeng.tech/user/token/refresh/
 
 Метод: POST
 
@@ -190,7 +190,7 @@ fetch("https://painassasin.online/user/token/", {
 Пример запроса:
 
 ```js
-fetch("https://painassasin.online/user/token/refresh/", {
+fetch("https://skypro-music-api.skyeng.tech/user/token/refresh/", {
   method: "POST",
   body: JSON.stringify({
     refresh:
