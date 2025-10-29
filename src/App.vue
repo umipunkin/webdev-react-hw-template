@@ -1,11 +1,205 @@
-<script setup></script>
+<script setup>
+import Navbar from './components/AppNavbar.vue'
+import FilterControls from './components/FilterControls.vue'
+import PlayerBar from './components/PlayerBar.vue'
+import PlayList from './components/PlayList.vue'
+import Track from './components/AppTrack.vue'
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="app">
+    <div class="wrapper">
+      <div class="container">
+        <main class="main">
+          <Navbar />
+
+          <div class="main__centerblock centerblock">
+            <div class="centerblock__search search">
+              <svg class="search__svg">
+                <use xlink:href="/img/icon/sprite.svg#icon-search"></use>
+              </svg>
+              <input class="search__text" type="search" placeholder="Поиск" name="search" />
+            </div>
+            <h2 class="centerblock__h2">Треки</h2>
+
+            <FilterControls />
+
+            <PlayList>
+              <Track>
+                <template #title>Guilt</template>
+                <template #subtitle></template>
+                <template #author>Nero</template>
+                <template #album>Welcome Reality</template>
+                <template #duration>4:44</template>
+              </Track>
+
+              <Track>
+                <template #title>Elektro</template>
+                <template #subtitle></template>
+                <template #author>Dynoro, Outwork, Mr. Gee</template>
+                <template #album>Elektro</template>
+                <template #duration>2:22</template>
+              </Track>
+
+              <Track>
+                <template #title>I'm Fire</template>
+                <template #subtitle></template>
+                <template #author>Ali Bakgor</template>
+                <template #album>I'm Fire</template>
+                <template #duration>2:22</template>
+              </Track>
+
+              <Track>
+                <template #title>Non Stop</template>
+                <template #subtitle>(Remix)</template>
+                <template #author>Стоункат, Psychopath</template>
+                <template #album>Non Stop</template>
+                <template #duration>4:12</template>
+              </Track>
+
+              <Track>
+                <template #title>Run Run</template>
+                <template #subtitle>(feat. AR/CO)</template>
+                <template #author>Jaded, Will Clarke, AR/CO</template>
+                <template #album>Run Run</template>
+                <template #duration>2:54</template>
+              </Track>
+
+              <Track>
+                <template #title>Eyes on Fire</template>
+                <template #subtitle>(Zeds Dead Remix)</template>
+                <template #author>Blue Foundation, Zeds Dead</template>
+                <template #album>Eyes on Fire</template>
+                <template #duration>5:20</template>
+              </Track>
+
+              <Track>
+                <template #title>Mucho Bien</template>
+                <template #subtitle>(Hi Profile Remix)</template>
+                <template #author>HYBIT, Mr. Black, Offer Nissim, Hi Profile</template>
+                <template #album>Mucho Bien</template>
+                <template #duration>3:41</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>Knives n Cherries</template>
+                <template #subtitle></template>
+                <template #author>minthaze</template>
+                <template #album>Captivating</template>
+                <template #duration>1:48</template>
+              </Track>
+
+              <Track>
+                <template #title>How Deep Is Your Love</template>
+                <template #subtitle></template>
+                <template #author>Calvin Harris, Disciples</template>
+                <template #album>How Deep Is Your Love</template>
+                <template #duration>3:32</template>
+              </Track>
+
+              <Track>
+                <template #title>Morena</template>
+                <template #subtitle></template>
+                <template #author>Tom Boxer</template>
+                <template #album>Soundz Made in Romania</template>
+                <template #duration>3:36</template>
+              </Track>
+
+              <Track>
+                <template #title></template>
+                <template #subtitle></template>
+                <template #author></template>
+                <template #album></template>
+                <template #duration></template>
+              </Track>
+            </PlayList>
+          </div>
+
+          <div class="main__sidebar sidebar">
+            <div class="sidebar__personal">
+              <p class="sidebar__personal-name">Sergey.Ivanov</p>
+              <div class="sidebar__icon">
+                <svg>
+                  <use xlink:href="/img/icon/sprite.svg#logout"></use>
+                </svg>
+              </div>
+            </div>
+            <div class="sidebar__block">
+              <div class="sidebar__list">
+                <div class="sidebar__item">
+                  <a class="sidebar__link" href="#">
+                    <img class="sidebar__img" src="/img/playlist01.png" alt="day's playlist" />
+                  </a>
+                </div>
+                <div class="sidebar__item">
+                  <a class="sidebar__link" href="#">
+                    <img class="sidebar__img" src="/img/playlist02.png" alt="day's playlist" />
+                  </a>
+                </div>
+                <div class="sidebar__item">
+                  <a class="sidebar__link" href="#">
+                    <img class="sidebar__img" src="/img/playlist03.png" alt="day's playlist" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+
+        <PlayerBar />
+
+        <footer class="footer"></footer>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
