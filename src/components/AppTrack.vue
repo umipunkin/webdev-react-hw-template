@@ -8,33 +8,51 @@
           </svg>
         </div>
         <div class="track__title-text">
-          <a class="track__title-link" href="http://">
-            <slot name="title"></slot>
-            <span class="track__title-span"><slot name="subtitle"></slot></span>
+          <a class="track__title-link" href="#">
+            {{ title }} <span class="track__title-span">{{ subtitle }}</span>
           </a>
         </div>
       </div>
       <div class="track__author">
-        <a class="track__author-link" href="http://"
-          ><slot name="author"></slot
-        ></a>
+        <a class="track__author-link" href="#">{{ author }}</a>
       </div>
       <div class="track__album">
-        <a class="track__album-link" href="http://"
-          ><slot name="album"></slot
-        ></a>
+        <a class="track__album-link" href="#">{{ album }}</a>
       </div>
       <div class="track__time">
         <svg class="track__time-svg">
           <use xlink:href="/img/icon/sprite.svg#icon-like"></use>
         </svg>
-        <span class="track__time-text"><slot name="duration"></slot></span>
+        <span class="track__time-text">{{ duration }}</span>
       </div>
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    default: ''
+  },
+  subtitle: {
+    type: String,
+    default: ''
+  },
+  author: {
+    type: String,
+    default: ''
+  },
+  album: {
+    type: String,
+    default: ''
+  },
+  duration: {
+    type: String,
+    default: ''
+  }
+})
+</script>
 
 <style scoped>
 .playlist__item {

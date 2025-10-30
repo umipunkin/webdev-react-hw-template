@@ -1,9 +1,48 @@
 <script setup>
+import { ref, onMounted } from 'vue'
 import Navbar from './components/AppNavbar.vue'
 import FilterControls from './components/FilterControls.vue'
 import PlayerBar from './components/PlayerBar.vue'
 import PlayList from './components/PlayList.vue'
 import Track from './components/AppTrack.vue'
+import { tracksAPI } from './data/tracks'
+
+const tracks = ref([])
+const loading = ref(false)
+const searchQuery = ref('')
+
+const loadTracks = async () => {
+  loading.value = true
+  try {
+    const response = await tracksAPI.getAllTracks()
+    tracks.value = response.data
+  } catch (error) {
+    console.error('Ошибка загрузки треков:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+const handleSearch = async () => {
+  if (!searchQuery.value.trim()) {
+    await loadTracks()
+    return
+  }
+
+  loading.value = true
+  try {
+    const response = await tracksAPI.searchTracks(searchQuery.value)
+    tracks.value = response.data
+  } catch (error) {
+    console.error('Ошибка поиска:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  loadTracks()
+})
 </script>
 
 <template>
@@ -18,148 +57,31 @@ import Track from './components/AppTrack.vue'
               <svg class="search__svg">
                 <use xlink:href="/img/icon/sprite.svg#icon-search"></use>
               </svg>
-              <input class="search__text" type="search" placeholder="Поиск" name="search" />
+              <input
+                class="search__text"
+                type="search"
+                placeholder="Поиск"
+                name="search"
+                v-model="searchQuery"
+                @input="handleSearch"
+              />
             </div>
             <h2 class="centerblock__h2">Треки</h2>
 
             <FilterControls />
 
-            <PlayList>
-              <Track>
-                <template #title>Guilt</template>
-                <template #subtitle></template>
-                <template #author>Nero</template>
-                <template #album>Welcome Reality</template>
-                <template #duration>4:44</template>
-              </Track>
+            <div v-if="loading" class="loading">Загрузка треков...</div>
 
-              <Track>
-                <template #title>Elektro</template>
-                <template #subtitle></template>
-                <template #author>Dynoro, Outwork, Mr. Gee</template>
-                <template #album>Elektro</template>
-                <template #duration>2:22</template>
-              </Track>
-
-              <Track>
-                <template #title>I'm Fire</template>
-                <template #subtitle></template>
-                <template #author>Ali Bakgor</template>
-                <template #album>I'm Fire</template>
-                <template #duration>2:22</template>
-              </Track>
-
-              <Track>
-                <template #title>Non Stop</template>
-                <template #subtitle>(Remix)</template>
-                <template #author>Стоункат, Psychopath</template>
-                <template #album>Non Stop</template>
-                <template #duration>4:12</template>
-              </Track>
-
-              <Track>
-                <template #title>Run Run</template>
-                <template #subtitle>(feat. AR/CO)</template>
-                <template #author>Jaded, Will Clarke, AR/CO</template>
-                <template #album>Run Run</template>
-                <template #duration>2:54</template>
-              </Track>
-
-              <Track>
-                <template #title>Eyes on Fire</template>
-                <template #subtitle>(Zeds Dead Remix)</template>
-                <template #author>Blue Foundation, Zeds Dead</template>
-                <template #album>Eyes on Fire</template>
-                <template #duration>5:20</template>
-              </Track>
-
-              <Track>
-                <template #title>Mucho Bien</template>
-                <template #subtitle>(Hi Profile Remix)</template>
-                <template #author>HYBIT, Mr. Black, Offer Nissim, Hi Profile</template>
-                <template #album>Mucho Bien</template>
-                <template #duration>3:41</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>Knives n Cherries</template>
-                <template #subtitle></template>
-                <template #author>minthaze</template>
-                <template #album>Captivating</template>
-                <template #duration>1:48</template>
-              </Track>
-
-              <Track>
-                <template #title>How Deep Is Your Love</template>
-                <template #subtitle></template>
-                <template #author>Calvin Harris, Disciples</template>
-                <template #album>How Deep Is Your Love</template>
-                <template #duration>3:32</template>
-              </Track>
-
-              <Track>
-                <template #title>Morena</template>
-                <template #subtitle></template>
-                <template #author>Tom Boxer</template>
-                <template #album>Soundz Made in Romania</template>
-                <template #duration>3:36</template>
-              </Track>
-
-              <Track>
-                <template #title></template>
-                <template #subtitle></template>
-                <template #author></template>
-                <template #album></template>
-                <template #duration></template>
-              </Track>
+            <PlayList v-else>
+              <Track
+                v-for="track in tracks"
+                :key="track.id"
+                :title="track.title"
+                :subtitle="track.subtitle"
+                :author="track.author"
+                :album="track.album"
+                :duration="track.duration"
+              />
             </PlayList>
           </div>
 
@@ -202,4 +124,149 @@ import Track from './components/AppTrack.vue'
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-color: #383838;
+}
+
+.container {
+  max-width: 1920px;
+  height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  background-color: #181818;
+}
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.main__centerblock {
+  width: auto;
+  flex-grow: 3;
+  padding: 20px 40px 20px 111px;
+}
+
+.main__sidebar {
+  max-width: 418px;
+  padding: 20px 90px 20px 78px;
+}
+
+.centerblock__search {
+  width: 100%;
+  border-bottom: 1px solid #4e4e4e;
+  margin-bottom: 51px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.centerblock__h2 {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 72px;
+  letter-spacing: -0.8px;
+  margin-bottom: 45px;
+}
+
+.search__svg {
+  width: 17px;
+  height: 17px;
+  margin-right: 5px;
+  stroke: #ffffff;
+  fill: transparent;
+}
+
+.search__text {
+  flex-grow: 100;
+  background-color: transparent;
+  border: none;
+  padding: 13px 10px 14px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+}
+
+.search__text::placeholder {
+  background-color: transparent;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.sidebar__personal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 12px 0 15px 0;
+}
+
+.sidebar__personal-name {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  margin-right: 16px;
+}
+
+.sidebar__icon {
+  width: 43px;
+  height: 43px;
+  background-color: #313131;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.sidebar__block {
+  height: 100%;
+  padding: 240px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar__item {
+  width: 250px;
+  height: 150px;
+}
+
+.sidebar__item:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.sidebar__link {
+  width: 100%;
+  height: 100%;
+}
+
+.sidebar__img {
+  width: 100%;
+  height: auto;
+}
+
+.loading {
+  color: #ffffff;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+</style>
